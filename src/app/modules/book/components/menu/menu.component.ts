@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { KeycloakService } from '../../../../services/keycloak/keycloak.service';
 
 @Component({
   selector: 'app-menu',
@@ -8,6 +9,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrl: './menu.component.scss'
 })
 export class MenuComponent implements OnInit {
+
+    constructor(private keycloakService: KeycloakService) {}
 
     ngOnInit(): void {
         // TODO: search for implementation of active link with angular itself
@@ -24,7 +27,6 @@ export class MenuComponent implements OnInit {
     }
 
     logout() {
-        localStorage.removeItem('token');
-        window.location.reload();
+        this.keycloakService.logout();
     }
 }
